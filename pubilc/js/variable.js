@@ -22,5 +22,5 @@ let myFriend = {
 // console.log(myFriend.age);
 // 야옹이의 이름, 나이
 console.log(pets[0].age);
-pets[0].age = 2;  // . 은 ~의
+pets[0].age = 2;  // . 은 ~의 라는 뜻
 console.log(pets[0].age);
