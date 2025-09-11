@@ -5,7 +5,7 @@ function calculate() {
   let first = parseInt(document.querySelector("#user1").value);
   let last = parseInt(document.querySelector("#user2").value);
   let opr = document.querySelector("#oper").value;
-  let result;
+  // let result;
   console.log(first, last, opr);
   switch (opr) {
     case '+':
