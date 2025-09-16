@@ -17,6 +17,7 @@ strAry.forEach(function (item, idx, ary) {
 });
 
 let timing = 60;
+let job = null;
 
 // 이벤트(찾기 버튼 클릭하면 alert('클릭'))
 document.querySelector('#search_word')
@@ -24,28 +25,34 @@ document.querySelector('#search_word')
     let search = document.querySelector("#user_value").value;
     let is_exist = false;
     document.querySelectorAll('div.inner').forEach(function (item, idx, ary) {
-      console.dir(item);
+      // console.dir(item);
       if (search == item.innerHTML) {
         item.remove();
         is_exist = true;
       }
     });
     if (is_exist) {
-      alert('같은 값이 있습니다')
+      // alert('같은 값이 있습니다')
     } else {
-      alert('찾는 값이 없습니다')
+      // alert('찾는 값이 없습니다')
     }
     document.querySelector("#user_value").value = '';
-    console.log(document.querySelectorAll('div.inner').length);
+    // console.log(document.querySelectorAll('div.inner').length);
+
+    if (timing > 0 && document.querySelectorAll('div.inner').length == 0) {
+      alert('성공');
+    }
 
     // alert('성공')/ alert('실패')
-    setInterval(function () {
-      console.log(timing--);
-      if (timing > 0 && document.querySelectorAll('div.inner').length == '') {
-        alert('성공')
-      }
-      if ( == 0)
-    }, 1000);
-
-
+    if (job === null) {
+      job = setInterval(function () {
+        console.log(timing--);
+        document.querySelector('#remaing').innerText = timing + '초';
+        if (timing <= 0) {
+          alert('실패');
+          clearInterval(job);
+          job = null;
+        }
+      }, 1000);
+    }
   });
