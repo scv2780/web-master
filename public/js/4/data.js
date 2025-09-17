@@ -17,3 +17,5 @@ const json = `[{"id":1,"first_name":"Ernestine","last_name":"Stanner","email":"e
 // json 문자열.
 const data = JSON.parse(json);
 console.log(data);
+const jsonObj = JSON.stringify(data);
+console.log(jsonObj);

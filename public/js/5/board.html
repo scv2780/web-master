@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    .data-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .data-container>div {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      padding: 20px;
+      width: 300px;
+      transition: transform 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .data-container>div:hover {
+      transform: translateY(-10px);
+    }
+
+    .data-id {
+      font-weight: bold;
+      font-size: 18px;
+      color: #4caf50;
+    }
+
+    .data-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .data-author {
+      font-size: 14px;
+      color: #888;
+      margin-top: 5px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      .data-container {
+        padding: 10px;
+      }
+
+      .data-container>div {
+        width: 100%;
+        padding: 15px;
+      }
+    }
+  </style>
+  <style>
+    /* 폼 컨테이너 */
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 30px 20px 10px;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* 입력 필드 공통 스타일 */
+    input[type="text"] {
+      padding: 12px 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      font-family: inherit;
+    }
+
+    input[type="text"]:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+      outline: none;
+    }
+
+    /* 버튼 스타일 */
+    input[type="submit"] {
+      padding: 12px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #43a047;
+      transform: translateY(-2px);
+    }
+
+    input[type="submit"]:active {
+      background-color: #388e3c;
+      transform: translateY(0);
+    }
+
+    /* 모바일 대응 */
+    @media (max-width: 600px) {
+      form {
+        padding: 20px;
+      }
+
+      input[type="text"],
+      input[type="submit"] {
+        font-size: 15px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <form action="#" method="post">
+      <input type="text" id="title" name="title" placeholder="Entet title">
+      <input type="text" id="author" name="author" placeholder="Entet author">
+      <input type="submit" id="btn" value="추가">
+    </form>
+  </div>
+
+  <div class="data-container" id="data-container">
+    <!-- <div>
+      <span class="data-id">1</span>
+      <span class="data-title">Test</span>
+      <span class="data-author">user01</span>
+    </div> -->
+  </div>
+  <script src="./db.js"></script>
+</body>
+
+</html>
