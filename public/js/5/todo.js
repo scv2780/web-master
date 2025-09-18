@@ -18,7 +18,34 @@ for (let i = 0; i < 5; i++) {
   star2 += '*';
 }
 
-let star3 = '*';
-for (let num = 5; num > 0; num--) {
+for (let i = 5; i >= 1; i--) {
+  let star3 = '';
+  for (let j = 0; j < i; j++) {
+    star3 += '*';
+  }
+  console.log(star3);
+}
 
+let line = 5;
+
+for (let i = line; i >= 1; i--) {
+  let star4 = '';
+  for (let j = 1; j < i; j++) {
+    star4 += ' ';
+  }
+  for (let p = 0; p < line - i + 1; p++) {
+    star4 += '*';
+  }
+  console.log(star4);
+}
+
+for (let i = line; i >= 1; i--) {
+  let star5 = '';
+  for (let p = 0; p < line - i; p++) {
+    star5 += ' ';
+  }
+  for (let j = 0; j < i; j++) {
+    star5 += '*';
+  }
+  console.log(star5);
 }
