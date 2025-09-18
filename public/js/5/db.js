@@ -7,6 +7,14 @@ document.querySelector('div.container>form')
     addpost()
   });
 
+const xhtp1 = new XMLHttpRequest();
+xhtp1.open('get', 'http://localhost:3000/comments'); // cmd에 json-server --watch db.json
+xhtp1.send();
+xhtp1.onload = function () {
+  comments = JSON.parse(xhtp1.responseText);
+}
+
+
 // 글등록.
 function addpost() {
   const xhtp = new XMLHttpRequest();
@@ -33,6 +41,26 @@ function addpost() {
 function maleRow(post) {
   let fields = ['id', 'title', 'author'];
   let div = document.createElement('div');
+
+  div.addEventListener('click', function () {
+    const target = this;
+    const post_id = this.children[0].innerHTML;
+    const cList = document.querySelector('.comments');
+    cList.innerHTML = "";
+    const filterList = comments.filter((item) => item.postId == post_id);
+    filterList.forEach((item) => {
+      let div = document.createElement('div');
+      let span = document.createElement('span');
+      span.innerHTML = item.id;
+      div.appendChild(span);
+      span = document.createElement('span');
+      span.innerHTML = item.content;
+      div.appendChild(span);
+      cList.appendChild(div);
+    })
+    target.appendChild(cList);
+  })
+
   for (let i = 0; i < fields.length; i++) {
     let span = document.createElement('span');
     span.innerHTML = post[fields[i]];
@@ -54,5 +82,4 @@ xhtp.onload = function () {
 
     document.querySelector('#data-container').appendChild(div);
   });
-
 }
