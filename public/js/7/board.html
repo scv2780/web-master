@@ -85,7 +85,8 @@
       transition: transform 0.3s ease;
       cursor: pointer;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      justify-content: space-between;
       gap: 10px;
       align-items: center;
       /* 기본 정렬은 가운데 */
@@ -94,6 +95,29 @@
 
     .data-container>div:hover {
       transform: translateY(-5px);
+    }
+
+    .data-container button {
+      flex-direction: column;
+      align-self: flex-end;
+      padding: 8px 10px;
+      background-color: #e53935;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .data-container button:hover {
+      background-color: #d32f2f;
+      transform: translateY(-2px);
+    }
+
+    .data-container button:active {
+      background-color: #b71c1c;
+      transform: translateY(0);
     }
 
     .data-id {
@@ -157,7 +181,7 @@
 
 <body>
   <div class="container">
-    <form action="#" method="post">
+    <form name="postForm" action="#" method="post">
       <input type="text" id="title" name="title" placeholder="Entet title">
       <input type="text" id="author" name="author" placeholder="Entet author">
       <input type="submit" id="btn" value="추가">
