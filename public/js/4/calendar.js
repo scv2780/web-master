@@ -50,8 +50,5 @@ for (let d = 1; d <= lastDate; d++) {
   //   td.setAttribute('class', 'sunday');
   // }
   ///////////////////////////////////
-  for () {
-
-  }
 }
 document.querySelector('#wd tbody').appendChild(tr);

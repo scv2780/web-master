@@ -15,23 +15,23 @@ console.log('요일:' + today.getDay()); // '일요일(0'), 월(1) ...토(6)
 // 날짜 입력 하면 '2025-11-12' => 요일정보를 반환해주는 함수.
 function translateDay(day) {
   // 날짜 -> 요일 반환.
-  // let tday = new Date(day);
-  // switch (tday.getDay()) {
-  //   case 0:
-  //     return '일요일';
-  //   case 1:
-  //     return '월요일';
-  //   case 2:
-  //     return '화요일';
-  //   case 3:
-  //     return '수요일';
-  //   case 4:
-  //     return '목요일';
-  //   case 5:
-  //     return '금요일';
-  //   case 6:
-  //     return '토요일';
-  // }
+  let tday = new Date(day);
+  switch (tday.getDay()) {
+    case 0:
+      return '일요일';
+    case 1:
+      return '월요일';
+    case 2:
+      return '화요일';
+    case 3:
+      return '수요일';
+    case 4:
+      return '목요일';
+    case 5:
+      return '금요일';
+    case 6:
+      return '토요일';
+  }
   /////////////////////////
   let dayAry = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
   let toDay = new Date(day);
