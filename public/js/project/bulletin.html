@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GM 메인 페이지</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      font-size: 32px;
+      font-weight: bold;
+      color: #ff3b3b;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .search-bar input {
+      width: 300px;
+      padding: 10px;
+      border: none;
+      border-radius: 20px 0 0 20px;
+      outline: none;
+      background-color: #2a2a2a;
+      color: #fff;
+    }
+
+    .search-bar button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 0 20px 20px 0;
+      background-color: #ff3b3b;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: #e63232;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .post {
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .post:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    }
+
+    .post h3 {
+      margin: 0 0 10px 0;
+      color: #ff3b3b;
+    }
+
+    .post p {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    /* 맨 위로 가기 버튼 */
+    #topBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff3b3b;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: none;
+      transition: background 0.3s;
+    }
+
+    #topBtn:hover {
+      background-color: #e63232;
+    }
+  </style>
+</head>
+
+<body>
+  <header>GM</header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="게시글 검색...">
+    <button>검색</button>
+  </div>
+
+  <div class="container" id="postContainer">
+    <!-- 게시글이 JS로 채워짐 -->
+  </div>
+
+  <button id="topBtn">↑</button>
+
+  <script>
+    const postContainer = document.getElementById("postContainer");
+    const topBtn = document.getElementById("topBtn");
+
+    // 예시 게시글 데이터
+    let posts = [];
+    for (let i = 1; i <= 100; i++) {
+      posts.push({
+        title: `게시글 ${i}`,
+        content: `이곳은 ${i}번째 음악 추천 글입니다 🎵`
+      });
+    }
+
+    let loadedCount = 0; // 현재까지 불러온 게시글 수
+    const loadBatch = 6; // 한 번에 불러올 개수
+
+    function loadPosts() {
+      const nextPosts = posts.slice(loadedCount, loadedCount + loadBatch);
+      nextPosts.forEach(post => {
+        const div = document.createElement("div");
+        div.className = "post";
+        div.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+        postContainer.appendChild(div);
+      });
+      loadedCount += loadBatch;
+    }
+
+    // 처음 로드 시 일부 게시글 불러오기
+    loadPosts();
+
+    // 스크롤 시 더 불러오기
+    window.addEventListener("scroll", () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        loadPosts();
+      }
+
+      // 맨 위 버튼 보이기
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        topBtn.style.display = "block";
+      } else {
+        topBtn.style.display = "none";
+      }
+    });
+
+    // 맨 위로 이동
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+</body>
+
+</html>
