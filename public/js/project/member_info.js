@@ -1,3 +1,4 @@
+    // member_info.js
     const form = document.getElementById("signupForm");
     const passwordInput = document.getElementById("password");
     const pwError = document.getElementById("pwError");
@@ -11,7 +12,8 @@
       let mTel = document.querySelector('#tel').value;
       let mMail = document.querySelector('#email').value;
 
-      fetch('http://localhost:3000/register', {
+      // json 포맷으로 서버 전달.
+      fetch('http://localhost:3000/member_info', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -32,5 +34,6 @@
         .catch((err) => console.log(err))
 
       alert("회원가입이 완료되었습니다! 🎶");
+      location.href = "login.html";
       form.reset();
     });
