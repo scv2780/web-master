@@ -1,5 +1,5 @@
 // bulletin.js
-
+console.log(localStorage)
 const postContainer = document.getElementById("postContainer");
 const topBtn = document.getElementById("topBtn");
 let isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // 로그인 상태 기억
@@ -43,43 +43,64 @@ writeBtn.addEventListener("click", () => {
   }
 });
 
-// 예시 게시글 데이터 (author, likes, comments 추가)
-let posts = [];
-for (let i = 1; i <= 100; i++) {
-  posts.push({
-    title: `게시글 제목 ${i}`,
-    content: `여기는 ${i}번째 게시글 내용입니다.`,
-    author: `닉네임${Math.floor(Math.random() * 10) + 1}`, // 예시 닉네임
-    likes: Math.floor(Math.random() * 100), // 0~99 사이의 랜덤 좋아요 수
-    comments: Math.floor(Math.random() * 50) // 0~49 사이의 랜덤 댓글 수
-  });
-}
+// 게시물 목록
+let page = 1; // 현재 페이지
+const limit = 10; // 한 번에 불러올 개수
+let isLoading = false; // 중복 요청 방지
+let noMorePosts = false; // 더 이상 데이터 없을 때
 
-let loadedCount = 0; // 현재까지 불러온 게시글 수
-const loadBatch = 6; // 한 번에 불러올 개수
+async function loadPosts() {
+  if (isLoading || noMorePosts)
+    return;
+  isLoading = true;
 
-function loadPosts() {
-  const nextPosts = posts.slice(loadedCount, loadedCount + loadBatch);
-  nextPosts.forEach(post => {
-    const div = document.createElement("div");
-    div.className = "post";
+  try {
+    const res = await fetch("http://localhost:3000/bulletin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        page,
+        limit
+      })
+    });
+    const posts = await res.json();
+    // console.log("불러온 게시글", posts);
 
-    // **게시글 카드 내부 HTML 구조 변경**
-    div.innerHTML = `
+    if (posts.length === 0) {
+      noMorePosts = true;
+      return;
+    }
+
+    posts.forEach(post => {
+      const div = document.createElement('div');
+      div.className = "post";
+      div.setAttribute("data-id", post.B_NUM); // 게시글 번호 저장
+
+      // **게시글 카드 내부 HTML 구조 변경**
+      div.innerHTML = `
       <div>
-        <h3>${post.title}</h3>
-        <p>${post.content}</p>
+        <h3>${post.B_TITLE}</h3>
+        <p class="post-content">${post.B_WRITE}</p>
+        <p class="read-more">자세히 보기</p>
       </div>
       <div class="post-footer">
-        <span class="post-author">${post.author}</span>
-        <span class="post-stats">좋아요 ${post.likes} · 댓글 ${post.comments}</span>
+        <span class="post-author">${post.NICKNAME}</span>
+        <span class="post-date">${new Date(post.B_DATE).toLocaleDateString()}</span>
+        <span class="post-stats">좋아요 · 댓글 </span>
       </div>
     `;
-    postContainer.appendChild(div);
-  });
-  loadedCount += loadBatch;
-}
+      postContainer.appendChild(div);
+    });
 
+    page++; // 다음 페이지 준비
+  } catch (err) {
+    console.error("게시글 불러오기 오류:", err);
+  } finally {
+    isLoading = false;
+  }
+}
 // 처음 로드 시 일부 게시글 불러오기
 loadPosts();
 
@@ -87,13 +108,11 @@ loadPosts();
 window.addEventListener("scroll", () => {
   // 스크롤이 페이지 끝에 가까워졌을 때 다음 게시글 로드
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-    if (loadedCount < posts.length) { // 로드할 게시글이 남아있을 때만 실행
-      loadPosts();
-    }
+    loadPosts();
   }
 
   // 맨 위 버튼 보이기/숨기기
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+  if (document.documentElement.scrollTop > 100) {
     topBtn.style.display = "block";
   } else {
     topBtn.style.display = "none";
@@ -107,3 +126,13 @@ topBtn.addEventListener("click", () => {
     behavior: "smooth"
   });
 });
+
+// 게시글 누르면
+document.addEventListener('click', (e) => {
+  // console.dir(e.target);
+  const postEl = e.target.closest(".post");
+  if (postEl) {
+    const postId = postEl.dataset.id; // 게시글 번호 가져오기
+    location.href = `details.html?b_num=${postId}`;
+  }
+})

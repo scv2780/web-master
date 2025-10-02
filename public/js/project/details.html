@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시물 자세히 보기</title>
+  <link href="details.css" rel="stylesheet">
+  <!-- Font Awesome 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <h1>GM</h1>
+    <nav id="navMenu"></nav>
+  </header>
+
+  <main>
+    <div class="post-detail">
+      <div class="post-header">
+        <h2 id="postTitle">게시글 제목</h2>
+        <button id="editBtn" class="edit-btn">수정</button>
+      </div>
+      <div class="post-content">
+        <p id="postContent">게시글 내용이 여기에 들어갑니다.</p>
+      </div>
+      <div class="post-footer">
+        <span class="author" id="postAuthor">닉네임</span>
+        <div class="stats">
+          <i id="likeBtn" class="fas fa-heart"></i><span id="likeCount">0</span>
+          <i id="commentToggle" class="fas fa-comment"></i><span id="commentCount">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="comment-section hidden" id="commentSection">
+      <h3>댓글 쓰기</h3>
+      <textarea id="commentInput" placeholder="댓글 작성..."></textarea>
+      <button id="submitComment">등록</button>
+
+      <div class="comments-list" id="commentsList">
+        <!-- 댓글 목록 무한 로딩 -->
+      </div>
+    </div>
+  </main>
+
+  <button id="topBtn">↑</button>
+  <script src="details.js"></script>
+</body>
+
+</html>

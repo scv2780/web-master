@@ -1,0 +1,130 @@
+    /* 기본 설정 */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* 헤더 스타일 */
+    header {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      justify-content: flex-end;
+      /* nav를 오른쪽 끝으로 보냄 */
+      align-items: center;
+      position: relative;
+    }
+
+    header h1 {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 32px;
+      color: #ff3b3b;
+      margin: 0;
+    }
+
+    header nav {
+      font-size: 14px;
+    }
+
+    /* 중앙 컨텐츠 영역 */
+    main {
+      max-width: 840px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #2c2c2c;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      box-sizing: border-box;
+    }
+
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .title-wrapper label {
+      font-size: 16px;
+      color: #ccc;
+      white-space: nowrap;
+      /* '제목' 글자가 줄바꿈되지 않도록 */
+    }
+
+    #title {
+      flex-grow: 1;
+      /* 남은 공간을 모두 차지 */
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #3a3a3a;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    #title:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(255, 59, 59, 0.5);
+    }
+
+    .save-btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #ff3b3b;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+
+    .save-btn:hover {
+      background-color: #e63232;
+    }
+
+    #content {
+      width: 100%;
+      min-height: 400px;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background-color: #3a3a3a;
+      color: #fff;
+      font-size: 16px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+
+    #content:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(255, 59, 59, 0.5);
+    }
+
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+      main {
+        margin: 15px;
+        padding: 20px;
+      }
+
+      .title-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #content {
+        min-height: 300px;
+      }
+    }

@@ -34,6 +34,7 @@
           // 로그인 상태 저장
           localStorage.setItem("isLoggedIn", "true");
           // 필요한 경우 닉네임도 저장 가능
+          localStorage.setItem("m_num", result.m_num);
           localStorage.setItem("nickname", result.nickname);
           // 로그인 성공 후 메인 페이지 등으로 이동
           location.href = "bulletin.html";

@@ -1,4 +1,5 @@
     // member_info.js
+
     const form = document.getElementById("signupForm");
     const passwordInput = document.getElementById("password");
     const pwError = document.getElementById("pwError");
